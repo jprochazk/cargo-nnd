@@ -2,6 +2,9 @@
 name = "cargo-nnd"
 version = "0.1.0"
 edition = "2024"
+description = "Cargo subcommand for easily starting nnd"
+license = "MIT"
+repository = "https://github.com/jprochazk/cargo-nnd"
 
 [dependencies]
 argh = "0.1.13"
