@@ -46,6 +46,10 @@ fn cargo(args: &Args, json: bool) -> Command {
     if let Some(bench) = &args.bench {
         cmd.arg(format!("--bench={bench}"));
     }
+    for feature in &args.features {
+        cmd.arg("-F");
+        cmd.arg(feature);
+    }
     if args.all_features {
         cmd.arg("--all-features");
     }
@@ -145,7 +149,7 @@ fn run(args: &Args, target: &Path) -> std::io::Result<()> {
 #[derive(argh::FromArgs)]
 struct Args {
     /// package to build
-    #[argh(option)]
+    #[argh(option, short = 'p')]
     package: Option<String>,
 
     /// build and debug the specified binary
@@ -167,6 +171,10 @@ struct Args {
     /// build and debug the specified bench
     #[argh(option)]
     bench: Option<String>,
+
+    /// comma-separated list of features to activate
+    #[argh(option, short = 'F')]
+    features: Vec<String>,
 
     /// activate all available features
     #[argh(switch, long = "all-features")]
